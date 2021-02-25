@@ -1,0 +1,27 @@
+linea,objetivo,actividad_primaria,actividad_secundaria,actividad_puntual,semana_inicio,semana_fin,estatus_puntual,importancia_puntual,importancia_secundaria,importancia_primaria,importancia_objetivo,importancia_linea,id_objetivo,id_primaria,id_secundaria,id_puntual,semana
+robina,servicio sat,scraper sat,conexión al sat,conexión sat,1,2,terminado,d,c,d,d,e,00,00,00,00,9
+robina,servicio sat,scraper sat,conexión al sat,extraccion captchas,2,2,terminado,d,c,d,d,e,00,00,00,01,9
+robina,servicio sat,scraper sat,conexión al sat,generacion de datos para entrenamiento,2,2,terminado,d,c,d,d,e,00,00,00,02,9
+robina,servicio sat,scraper sat,constancia situación fiscal,exploracion y definicion de modelos de datos sat,4,5,terminado,d,b,d,d,e,00,00,01,00,9
+robina,servicio sat,scraper sat,constancia situación fiscal,obtencion constancia de situación fiscal,4,4,terminado,c,b,d,d,e,00,00,01,01,9
+robina,servicio sat,scraper sat,facturacion,exploracion pagina facturacion,5,5,terminado,c,d,d,d,e,00,00,02,00,9
+robina,servicio sat,scraper sat,facturacion,scraper facturacion,5,6,terminado,d,d,d,d,e,00,00,02,01,9
+robina,servicio sat,scraper sat,declaraciones,exploracion pagina declaraciones,7,7,terminado,c,c,d,d,e,00,00,03,00,9
+robina,servicio sat,scraper sat,declaraciones,scraper declaraciones,7,8,-1 semana,c,c,d,d,e,00,00,03,01,9
+robina,servicio sat,scraper sat,descargas masivas,agregar proxies,8,8,terminado,c,d,d,d,e,00,00,04,00,9
+robina,servicio sat,scraper sat,descargas masivas,generador multiprocessing,8,8,terminado,d,d,d,d,e,00,00,04,01,9
+robina,servicio sat,scraper sat,descargas masivas,generador multithreading,9,9,1 semana,d,d,d,d,e,00,00,04,02,9
+robina,servicio sat,scraper sat,descargas masivas,pruebas descargas masivas,9,9,1 semana,d,d,d,d,e,00,00,04,03,9
+robina,servicio sat,scraper sat,ia captchas,seleccion del modelo ia,2,2,terminado,d,c,d,d,e,00,00,05,00,9
+robina,servicio sat,scraper sat,ia captchas,desarrollo e implementacion del modelo,2,3,terminado,d,c,d,d,e,00,00,05,01,9
+robina,servicio sat,scraper sat,ia captchas,entrenamiento del modelo,3,3,terminado,d,c,d,d,e,00,00,05,02,9
+robina,servicio sat,scraper sat,ia captchas,optimizacion del modelo,3,3,recurrente,b,c,d,d,e,00,00,05,03,9
+robina,servicio sat,scraper sat,ia captchas,pruebas y caracterizacion captcha,3,3,terminado,c,c,d,d,e,00,00,05,04,9
+robina,servicio sat,scraper sat,servicio captchas,servidor local para resolver captchas,4,4,terminado,c,c,d,d,e,00,00,06,00,9
+robina,servicio sat,scraper sat,servicio captchas,integrar servidor de captchas a scraper sat,4,4,terminado,c,c,d,d,e,00,00,06,01,9
+robina,servicio sat,scraper sat,servicio captchas,implementacion de webservice captcha (nube),10,10,pendiente,c,c,d,d,e,00,00,06,02,9
+robina,servicio sat,scraper sat,servicio captchas,integrar webservice captcha a scraper,10,10,pendiente,c,c,d,d,e,00,00,06,03,9
+robina,servicio sat,scraper sat,integracion,conexión con base de datos,11,11,pendiente,c,c,d,d,e,00,00,07,00,9
+robina,servicio sat,scraper sat,integracion,desarrollo webservice sat,12,12,pendiente,d,c,d,d,e,00,00,07,01,9
+robina,servicio sat,scraper sat,pruebas,pruebas y qa,11,12,pendiente,d,c,d,d,e,00,00,08,00,9
+robina,servicio sat,scraper sat,pruebas,puesta a produccion,13,13,pendiente,d,c,d,d,e,00,00,08,01,9
