@@ -1,6 +1,7 @@
 import pandas as pd
 import datetime
 import numpy as np
+from IPython.display import HTML
 pd.options.mode.chained_assignment = None
 
 
@@ -10,15 +11,18 @@ class Mapa():
     """Mapas de actividades.
     """
 
-    def __init__(self, filename):
+    def __init__(self, filename, delimiter=None):
         self.filename = filename
-        self.df = self.load_csv()
-        self.backup = self.load_csv()
+        self.df = self.load_csv(delimiter=delimiter)
+        self.backup = self.load_csv(delimiter=delimiter)
 
-    def load_csv(self):
+    def load_csv(self, delimiter=None):
         """Carga el archivo csv.
         """
-        data = pd.read_csv(self.filename)
+        data = pd.read_csv(self.filename, delimiter=delimiter,
+                           dtype={'ID_OBJETIVO': str, 'ID_PRIMARIA': str,
+                                  'ID_SECUNDARIA': str, 'ID_PUNTUAL': str,
+                                  'SEMANA_INICIO': str, 'SEMANA_FIN': str})
         return data
 
     def fix_id(self):
@@ -119,11 +123,12 @@ class Mapa():
         elif status == 'SEMANAS' or status == 'SEMANA':
             self.semanas(index_)
         else:
-            print(u'Introduzca un valor de estatus válido: TERMINADO/RECURRENTE/SEMANAS')
+            print(u'Introduzca un valor de estatus válido:\n'
+                +'TERMINADO/RECURRENTE/SEMANAS')
 
     def fix_all(self, update=True):
-        """Aplica todas las correcciones y opcinalmente la actualización
-        de semana em curso.
+        """Aplica todas las correcciones y opcionalmente la actualización
+        de semana en curso.
         """
         self.fix_format()
         self.fix_id()
@@ -138,7 +143,23 @@ class Mapa():
         """
         self.df.to_csv(path+filename, index=None, sep='|', quoting=2)
 
+    def status(self, status):
+        """Devuelve las filas cque cumplan el status seleccionado.
+        """
+        status = status.strip().upper()
+        dic = {'TERMINADO': 'TERMINADO', 'RECURRENTE': 'RECURRENTE',
+            'PENDIENTE': 'PENDIENTE', 'EN PROCESO': r'^\d', 'ATRASADO': r'^-'}
+        if status in dic:
+            out = self.df[self.df['ESTATUS_PUNTUAL'].str.match(dic[status])]
+        else:
+            print(u'Introduzca un valor de estatus válido:\n'
+                +'TERMINADO/RECURRENTE/PENDIENTE/ATRASADO/EN PROCESO')
+            out = None
+        return out
 
+
+
+#------------------------------------------------------------------------------
 def estatus_puntual(ini, fin, actual):
     """Calcula el valor de las columnas de SEMANA_INICIO y SEMANA_FIN
     a partir de la semana en curso.
@@ -159,3 +180,66 @@ def estatus_puntual(ini, fin, actual):
         if dias == -1: sem = 'SEMANA'
         estatus = f'{dias} {sem}'
     return estatus
+
+def view(df):
+    """Desplegar la tabla fuera del notebook.
+    """
+    css = """<style>
+    table { border-collapse: collapse; border: 3px solid #eee; }
+    table tr th:first-child { background-color: #eeeeee; color: #333; font-weight: bold }
+    table thead th { background-color: #eee; color: #000; }
+    tr, th, td { border: 1px solid #ccc; border-width: 1px 0 0 1px; border-collapse: collapse;
+    padding: 3px; font-family: monospace; font-size: 10px }</style>
+    """
+    s  = '<script type="text/Javascript">'
+    s += ('var win = window.open("", "Title", "toolbar=no, location=no, '
+    + 'directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, '
+    + 'width=780, height=200, top="+(screen.height-400)+", '
+    + 'left="+(screen.width-840)); win.document.body.innerHTML = \''
+    + (df.to_html() + css).replace("\n",'\\') + '\';')
+    s += '</script>'
+    return (HTML(s+css))
+
+def inicio_semana(week, year):
+    """
+    """
+    d = f'{year}-W{week-1}'
+    r = datetime.datetime.strptime(d + '-1', '%G-W%V-%u')
+    s = r.strftime('%d/%m/%Y')
+    return s
+
+def fin_semana(week, year):
+    """
+    """
+    d = f'{year}-W{week-1}'
+    r = datetime.datetime.strptime(d + '-5', '%G-W%V-%u')
+    s = r.strftime('%d/%m/%Y')
+    return s
+
+def resumen_actividades(df, fecha_fin=False, filter_=[]):
+    """
+    """
+    cols = ['LINEA', 'OBJETIVO', 'ACTIVIDAD_PRIMARIA',
+            'ACTIVIDAD_SECUNDARIA', 'ACTIVIDAD_PUNTUAL']
+    df = df.astype({'SEMANA_FIN': int})
+    df = df.set_index(cols).sort_index().sort_values(by=['SEMANA_FIN'])
+
+    for level0 in df.index.levels[0]:
+        print(level0)
+        for level1 in df.index.levels[1]:
+            print('    '*1+level1)
+            for level2 in df.index.levels[2]:
+                print('    '*2+level2)
+                for level3 in df.index.levels[3]:
+                    print('    '*3+level3)
+                    sub_df = df.xs([level0, level1, level2, level3])
+                    sub_df = sub_df.astype({'SEMANA_FIN': int})
+                    sub_df = sub_df.sort_values(by=['SEMANA_FIN'])
+                    for n in list(sub_df.index):
+                        imp = sub_df.loc[n, 'IMPORTANCIA_PUNTUAL']
+                        if imp not in filter_:
+                            semana = int(sub_df.loc[n, 'SEMANA_FIN'])
+                            fin = ', '+fin_semana(semana, 2021)
+                            #inicio = ', '+inicio_semana(semana, 2021)
+                            if fecha_fin == False: fin = ''
+                            print('    '*4+n+fin)
