@@ -1,24 +1,24 @@
 linea,objetivo,actividad_primaria,actividad_secundaria,actividad_puntual,semana_inicio,semana_fin,estatus_puntual,importancia_puntual,importancia_secundaria,importancia_primaria,importancia_objetivo,importancia_linea,id_objetivo,id_primaria,id_secundaria,id_puntual,semana
-nombre_línea,servicio,scraper,conexión,conexión,1,2,terminado,d,c,d,d,e,00,00,00,00,9
-nombre_línea,servicio,scraper,conexión,extraccion modelo,2,2,terminado,d,c,d,d,e,00,00,00,01,9
-nombre_línea,servicio,scraper,conexión,generacion de datos para entrenamiento,2,2,terminado,d,c,d,d,e,00,00,00,02,9
-nombre_línea,servicio,scraper,documento A,exploración y definicion de modelos de datos,4,5,terminado,d,b,d,d,e,00,00,01,00,9
-nombre_línea,servicio,scraper,documento A,obtencion documento A,4,4,terminado,c,b,d,d,e,00,00,01,01,9
-nombre_línea,servicio,scraper,documento B,exploración pagina documento B,5,5,terminado,c,d,d,d,e,00,00,02,00,9
-nombre_línea,servicio,scraper,documento B,scraper documento B,5,6,terminado,d,d,d,d,e,00,00,02,01,9
-nombre_línea,servicio,scraper,documento C,exploración pagina documento C,7,7,terminado,c,c,d,d,e,00,00,03,00,9
+nombre_línea,servicio,scraper,conexión,conexión,1,2,terminada,d,c,d,d,e,00,00,00,00,9
+nombre_línea,servicio,scraper,conexión,extraccion modelo,2,2,terminada,d,c,d,d,e,00,00,00,01,9
+nombre_línea,servicio,scraper,conexión,generacion de datos para entrenamiento,2,2,terminada,d,c,d,d,e,00,00,00,02,9
+nombre_línea,servicio,scraper,documento A,exploración y definicion de modelos de datos,4,5,terminada,d,b,d,d,e,00,00,01,00,9
+nombre_línea,servicio,scraper,documento A,obtencion documento A,4,4,terminada,c,b,d,d,e,00,00,01,01,9
+nombre_línea,servicio,scraper,documento B,exploración pagina documento B,5,5,terminada,c,d,d,d,e,00,00,02,00,9
+nombre_línea,servicio,scraper,documento B,scraper documento B,5,6,terminada,d,d,d,d,e,00,00,02,01,9
+nombre_línea,servicio,scraper,documento C,exploración pagina documento C,7,7,terminada,c,c,d,d,e,00,00,03,00,9
 nombre_línea,servicio,scraper,documento C,scraper documento C,7,8,-1 semana,c,c,d,d,e,00,00,03,01,9
-nombre_línea,servicio,scraper,descargas masivas,agregar proxies,8,8,terminado,c,d,d,d,e,00,00,04,00,9
-nombre_línea,servicio,scraper,descargas masivas,generador multiprocessing,8,8,terminado,d,d,d,d,e,00,00,04,01,9
+nombre_línea,servicio,scraper,descargas masivas,agregar proxies,8,8,terminada,c,d,d,d,e,00,00,04,00,9
+nombre_línea,servicio,scraper,descargas masivas,generador multiprocessing,8,8,terminada,d,d,d,d,e,00,00,04,01,9
 nombre_línea,servicio,scraper,descargas masivas,generador multithreading,9,9,1 semana,d,d,d,d,e,00,00,04,02,9
 nombre_línea,servicio,scraper,descargas masivas,pruebas descargas masivas,9,9,1 semana,d,d,d,d,e,00,00,04,03,9
-nombre_línea,servicio,scraper,modelo,seleccion del modelo,2,2,terminado,d,c,d,d,e,00,00,05,00,9
-nombre_línea,servicio,scraper,modelo,desarrollo e implementacion del modelo,2,3,terminado,d,c,d,d,e,00,00,05,01,9
-nombre_línea,servicio,scraper,modelo,entrenamiento del modelo,3,3,terminado,d,c,d,d,e,00,00,05,02,9
+nombre_línea,servicio,scraper,modelo,seleccion del modelo,2,2,terminada,d,c,d,d,e,00,00,05,00,9
+nombre_línea,servicio,scraper,modelo,desarrollo e implementacion del modelo,2,3,terminada,d,c,d,d,e,00,00,05,01,9
+nombre_línea,servicio,scraper,modelo,entrenamiento del modelo,3,3,terminada,d,c,d,d,e,00,00,05,02,9
 nombre_línea,servicio,scraper,modelo,optimizacion del modelo,3,3,recurrente,b,c,d,d,e,00,00,05,03,9
-nombre_línea,servicio,scraper,modelo,pruebas y caracterizacion modelo,3,3,terminado,c,c,d,d,e,00,00,05,04,9
-nombre_línea,servicio,scraper,servicio modelo,servidor local para resolver modelo,4,4,terminado,c,c,d,d,e,00,00,06,00,9
-nombre_línea,servicio,scraper,servicio modelo,integrar servidor de modelo a scraper,4,4,terminado,c,c,d,d,e,00,00,06,01,9
+nombre_línea,servicio,scraper,modelo,pruebas y caracterizacion modelo,3,3,terminada,c,c,d,d,e,00,00,05,04,9
+nombre_línea,servicio,scraper,servicio modelo,servidor local para resolver modelo,4,4,terminada,c,c,d,d,e,00,00,06,00,9
+nombre_línea,servicio,scraper,servicio modelo,integrar servidor de modelo a scraper,4,4,terminada,c,c,d,d,e,00,00,06,01,9
 nombre_línea,servicio,scraper,servicio modelo,implementacion de webservice modelo (nube),10,10,pendiente,c,c,d,d,e,00,00,06,02,9
 nombre_línea,servicio,scraper,servicio modelo,integrar webservice modelo a scraper,10,10,pendiente,c,c,d,d,e,00,00,06,03,9
 nombre_línea,servicio,scraper,integracion,conexión con base de datos,11,11,pendiente,c,c,d,d,e,00,00,07,00,9

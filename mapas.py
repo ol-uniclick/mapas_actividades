@@ -82,16 +82,16 @@ class Mapa():
                       for i in range(len(dat[0]))]
 
         for i in range(len(new_status)):
-            if data['ESTATUS_PUNTUAL'][i] not in ['TERMINADO', 'RECURRENTE']:
+            if data['ESTATUS_PUNTUAL'][i] not in ['TERMINADA', 'RECURRENTE']:
                 data['ESTATUS_PUNTUAL'][i] = new_status[i]
         self.df = data
 
     def terminado(self, index_):
         """Pone el valor de la columna ESTATUS_PUNTUAL con renglón
-        index_ como 'TERMINADO'.
+        index_ como 'TERMINADA'.
         """
         index_ = int(index_)
-        self.df['ESTATUS_PUNTUAL'][index_] = 'TERMINADO'
+        self.df['ESTATUS_PUNTUAL'][index_] = 'TERMINADA'
 
     def recurrente(self, index_):
         """Pone el valor de la columna ESTATUS_PUNTUAL con renglón
@@ -116,7 +116,7 @@ class Mapa():
         """
         index_ = int(index_)
         status = status.strip().upper()
-        if status == 'TERMINADO':
+        if status == 'TERMINADA':
             self.terminado(index_)
         elif status == 'RECURRENTE':
             self.recurrente(index_)
@@ -124,7 +124,7 @@ class Mapa():
             self.semanas(index_)
         else:
             print(u'Introduzca un valor de estatus válido:\n'
-                +'TERMINADO/RECURRENTE/SEMANAS')
+                +'TERMINADA/RECURRENTE/SEMANAS')
 
     def fix_all(self, update=True):
         """Aplica todas las correcciones y opcionalmente la actualización
@@ -147,17 +147,15 @@ class Mapa():
         """Devuelve las filas cque cumplan el status seleccionado.
         """
         status = status.strip().upper()
-        dic = {'TERMINADO': 'TERMINADO', 'RECURRENTE': 'RECURRENTE',
+        dic = {'TERMINADA': 'TERMINADA', 'RECURRENTE': 'RECURRENTE',
             'PENDIENTE': 'PENDIENTE', 'EN PROCESO': r'^\d', 'ATRASADO': r'^-'}
         if status in dic:
             out = self.df[self.df['ESTATUS_PUNTUAL'].str.match(dic[status])]
         else:
             print(u'Introduzca un valor de estatus válido:\n'
-                +'TERMINADO/RECURRENTE/PENDIENTE/ATRASADO/EN PROCESO')
+                +'TERMINADA/RECURRENTE/PENDIENTE/ATRASADO/EN PROCESO')
             out = None
         return out
-
-
 
 #------------------------------------------------------------------------------
 def estatus_puntual(ini, fin, actual):
@@ -222,7 +220,7 @@ def resumen_actividades(df, fecha_fin=False, filter_=[]):
     cols = ['LINEA', 'OBJETIVO', 'ACTIVIDAD_PRIMARIA',
             'ACTIVIDAD_SECUNDARIA', 'ACTIVIDAD_PUNTUAL']
     df = df.astype({'SEMANA_FIN': int})
-    df = df.set_index(cols).sort_index().sort_values(by=['SEMANA_FIN'])
+    df = df.set_index(cols).sort_index()#.sort_values(by=['SEMANA_FIN'])
 
     for level0 in df.index.levels[0]:
         print(level0)
@@ -232,14 +230,19 @@ def resumen_actividades(df, fecha_fin=False, filter_=[]):
                 print('    '*2+level2)
                 for level3 in df.index.levels[3]:
                     print('    '*3+level3)
-                    sub_df = df.xs([level0, level1, level2, level3])
-                    sub_df = sub_df.astype({'SEMANA_FIN': int})
-                    sub_df = sub_df.sort_values(by=['SEMANA_FIN'])
-                    for n in list(sub_df.index):
-                        imp = sub_df.loc[n, 'IMPORTANCIA_PUNTUAL']
-                        if imp not in filter_:
-                            semana = int(sub_df.loc[n, 'SEMANA_FIN'])
-                            fin = ', '+fin_semana(semana, 2021)
-                            #inicio = ', '+inicio_semana(semana, 2021)
-                            if fecha_fin == False: fin = ''
-                            print('    '*4+n+fin)
+                    try:
+                        sub_df = df.xs([level0, level1, level2, level3])
+                        sub_df = sub_df.astype({'SEMANA_FIN': int})
+                        #sub_df = sub_df.sort_values(by=['SEMANA_FIN'])
+                        for n in list(sub_df.index):
+                            imp = sub_df.loc[n, 'IMPORTANCIA_PUNTUAL']
+                            if imp not in filter_:
+                                if fecha_fin == False:
+                                    fin = ''
+                                else:
+                                    semana = int(sub_df.loc[n, 'SEMANA_FIN'])
+                                    fin = ', '+fin_semana(semana, 2021)
+                                    inicio = ', '+inicio_semana(semana, 2021)
+                                print('    '*4+n+fin)
+                    except:
+                        pass
